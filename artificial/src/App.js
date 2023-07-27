@@ -1,10 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import Dashboard from './Pages/Dashboard';
 
 function App() {
   return (
     <div className="App">
-      <h3 className='text-2xl bg:red'>my name is gopi vishwakarma</h3>
+      <Dashboard />
     </div>
   );
 }
