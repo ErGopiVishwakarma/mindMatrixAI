@@ -1,6 +1,7 @@
 import React from 'react'
-import LeftSidebar from './LeftSidebar'
-import InputPrompt from './InputPrompt'
+import InputPrompt from '../Component/Dashboard/InputPrompt'
+import LeftSidebar from '../Component/Dashboard/LeftSidebar'
+
 
 const Dashboard = () => {
     return (
@@ -13,7 +14,7 @@ const Dashboard = () => {
                     {/*=================== right side box===================  */}
                     <div id="content" class="bg-white/10 col-span-10 sm:col-span-9 rounded-lg m-3 p-4 relative align-middle justify-items-center">
                       {/*================= newChat div component ============= */}
-                      
+
                       {/*================ conversation div component ================ */}
 
                         {/* ============input prompt div here ============= */}

@@ -1,5 +1,4 @@
 import React from 'react'
-import "../Style/input.css"
 import { VscSend } from 'react-icons/vsc'
 
 const InputPrompt = () => {
