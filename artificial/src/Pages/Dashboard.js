@@ -14,8 +14,6 @@ const Dashboard = () => {
                         gopi
                     </div>
                 </div>
-
-
             </div>
         </>
     )
