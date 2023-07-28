@@ -1,5 +1,5 @@
 import React from 'react'
-import { VscSend } from 'react-icons/vsc'
+// import { VscSend } from 'react-icons/vsc'
 
 const InputPrompt = () => {
     return (
@@ -10,7 +10,7 @@ const InputPrompt = () => {
             dark:text-white focus:outline-none text-white" placeholder="send a message" required />
 
             <button type="submit" class="text-white absolute right-2.5 bottom-1.5 px-4 py-2 ">
-                <VscSend />
+                {/* <VscSend /> */}
             </button>
         </div>
     )
