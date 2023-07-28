@@ -1,6 +1,7 @@
 import React from 'react'
 import InputPrompt from '../Component/Dashboard/InputPrompt'
 import LeftSidebar from '../Component/Dashboard/LeftSidebar'
+import NewChat from '../Component/Dashboard/NewChat'
 
 
 const Dashboard = () => {
@@ -13,9 +14,11 @@ const Dashboard = () => {
 
                     {/*=================== right side box===================  */}
                     <div id="content" class="bg-white/10 col-span-10 sm:col-span-9 rounded-lg m-3 p-4 relative align-middle justify-items-center">
-                      {/*================= newChat div component ============= */}
-
-                      {/*================ conversation div component ================ */}
+                        {/*================= newChat div component ============= */}
+                        <div className="w-full flex items-center justify-center">
+                            <NewChat />
+                        </div>
+                        {/*================ conversation div component ================ */}
 
                         {/* ============input prompt div here ============= */}
                         <div className="absolute bottom-0 left-0 w-full flex items-center justify-center">
