@@ -1,0 +1,8 @@
+ 
+   
+    @layer utilities {
+      .bg-gradient-radial {
+        background-image: radial-gradient(ellipse farthest-corner at center center, #0E0C15 0%, #571950 0%, #0E0C15 100%);
+      }
+    }
+    
