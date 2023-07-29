@@ -1,26 +1,39 @@
 import React from 'react'
+import logo from '../../Images/ai1.gif'
 
 const LeftSidebar = () => {
     return (
-        <div id="menu" class="relative px-30 col-span-2 sm:col-span-3 rounded-lg p-4">
-            <h1 class="font-bold text-lg lg:text-3xl bg-gradient-to-br from-white via-white/50 to-transparent bg-clip-text text-transparent">Dashboard<span class="text-indigo-400">.</span></h1>
-            <p class="text-slate-400 text-sm mb-2">Welcome back,</p>
-            <a href="#" class="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-white/10 group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2">
-            </a>
-            <hr class="my-2 border-slate-700" />
-            <div className="flex justify-center align-middle">
-                <button className='text-purple-600'>new chat</button>
-            </div>
-            {/* user name and pic detail div  */}
-            <div class="absolute bottom-0 left-0 right-0 w-auto py-8 pl-3 w-100% border-3 border-solid border-orange-500 ">
-            {/* <hr className='w-100%' /> */}
-                <div className='flex gap-4'>
-                    <img src='https;;' className='h-10 w-10' alt='gopi' />
-                    <p className='text-pink-700'>gopi9876</p>
-                </div>
+        <div id="menu" class="relative px-30 col-span-2 sm:col-span-3 rounded-lg p-4 px-11">
+            <div className='flex flex-row gap-4 justify-center align-middle'>
+                <img src={logo} className="h-12 w-12 rounded-full" />
+                <h1 class="font-bold text-lg lg:text-2xl  text-orange-600 italic">mind matrix</h1>
             </div>
 
-        </div>
+            <hr class="my-2 border-slate-700" />
+            <div className="flex justify-center align-middle mt-5 py-2 border border-solid border-orange-800 pointer">
+                <button className='text-gray-300'>new chat</button>
+            </div>
+
+            {/* chat history div here  */}
+
+
+
+            {/* user name and pic detail div  */}
+
+            <div class="absolute bottom-0 left-0 right-0 w-auto py-8 p-8 w-100% border-3 border-solid border-orange-500   ">
+                <hr className='w-100% mb-8 bg-orange-600' />
+                <div className='flex gap-4 flex-row justify-between '>
+                    <div className='flex flex-row gap-4'>
+                        <img src={logo} className="h-12 w-12 rounded-full" alt='gopi' />
+                        <div className='flex flex-col text-sm'>
+                            <p className='text-pink-700 text-sm'>gopi</p>
+                            <p>gopi@gmail.com</p>
+                        </div>
+                    </div>
+                    <button className='text-xl'>...</button>
+                </div>
+            </div>
+        </div >
     )
 }
 
