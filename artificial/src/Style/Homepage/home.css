@@ -1,8 +1,38 @@
- 
-   
-    @layer utilities {
-      .bg-gradient-radial {
-        background-image: radial-gradient(ellipse farthest-corner at center center, #0E0C15 0%, #571950 0%, #0E0C15 100%);
-      }
-    }
-    
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animated-text {
+  animation: slideInFromBottom 1s ease-in-out;
+}
+
+/* Add this CSS in your stylesheets or in a style block in your component */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+  
+.radial-gradient-background {
+  background: radial-gradient(
+    ellipse farthest-corner at center center,
+    #0E0C15 0%,
+    #2b1028 50%,
+    #0E0C15 100%
+  );
+  background-size: 300% 300%;
+  animation: gradientAnimation 10s linear infinite;
+}
