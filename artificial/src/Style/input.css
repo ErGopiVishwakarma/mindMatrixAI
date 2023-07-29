@@ -1,0 +1,12 @@
+#custom-height {
+  height: calc(100vh - 120px);
+  box-sizing: border-box;
+}
+#custom-height {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#custom-height::-webkit-scrollbar {
+  display: none;
+}
