@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import Dashboard from './Pages/Dashboard';
 import HomePage from './Pages/HomePage';
+import Dashboard from './Pages/Dashboard';
 
 function App() {
   return (
     <div className="App">
-      {/* </Dashboard /> */}
-      <HomePage/>
+     <Dashboard />
+      {/* <HomePage/> */}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import logo from '../../Images/ai1.gif'
 
 const LeftSidebar = () => {
     return (
-        <div id="menu" class="relative px-30 col-span-2 sm:col-span-3 rounded-lg p-4 px-11">
+        <div id="menu" class="relative px-30  md:col-span-3 rounded-lg p-4 px-11 md:px-4  sm:hidden md:block hidden">
             <div className='flex flex-row gap-4 justify-center align-middle'>
                 <img src={logo} className="h-12 w-12 rounded-full" />
                 <h1 class="font-bold text-lg lg:text-2xl  text-orange-600 italic">mind matrix</h1>
