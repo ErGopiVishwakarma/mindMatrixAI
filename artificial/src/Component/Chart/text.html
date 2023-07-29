@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading Component</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 flex justify-center items-center h-screen">
+  <div class="spinner">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <style>
+    .spinner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .dot {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin: 0.25rem;
+      border-radius: 50%;
+      background-color: white;
+      animation: loading-circle 1s linear infinite;
+    }
+
+    @keyframes loading-circle {
+      0% {
+        transform: translateX(0) translateY(-30px);
+      }
+      100% {
+        transform: translateX(0) translateY(-30px) rotate(360deg);
+      }
+    }
+  </style>
+</body>
+</html>

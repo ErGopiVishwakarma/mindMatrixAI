@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 const NewChat = () => {
   const [params, searchParams] = useSearchParams()
   let a = params.getAll('user')
-  console.log(a[0].split(",")[2])
+  console.log(a[0]?.split(",")[2])
 
     return (
         <div className=' flex flex-col sm:px-10 md:px-15 lg:px-40 gap-8'>
