@@ -101,4 +101,4 @@ This relationship represents that a chat can have multiple conversations, but ea
 The provided ER diagram and database schema represent a chat application where users can engage in chat sessions with bots. The `users` table stores user information, the `chat` table stores information about chat sessions, and the `conversations` table stores the individual conversations within those chat sessions. The relationships between tables establish the connections between users, chat sessions, and conversations, allowing for efficient querying and management of chat-related data.
 
 
-## ERDiagram <p> <img src="logo.png" alt="Project Logo" width="160" style="border: 1px solid black; border-radius: 10px;"> </p>
+## ERDiagram <p> <img src="er_daigram.png" alt="Project Logo" width="660" style="border: 1px solid black; border-radius: 10px;"> </p>
