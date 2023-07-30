@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,6 +53,7 @@ public class OpenAi implements IOpenAi{
     
     @Override
 	public String newAi(Prompts prompt, HttpSession session) {
+//    	String id = session.getId();
 		// TODO Auto-generated method stub
     
     	@SuppressWarnings("unchecked")
@@ -167,23 +169,32 @@ public class OpenAi implements IOpenAi{
 	
 
 	@Override
-	public Conversation startInterview(Integer userId,  Prompts prompts) {
+	public Conversation startInterview(Integer userId,  Prompts prompts,  HttpSession session) {
 
 		Users users = userRepo.findById(userId).get();
 
-		Chat chat = new Chat();
-		String interviewPrompt = Prompts.getInterviewPrompt(prompts.getPrompt());
-		generate(interviewPrompt);
-    	Conversation conversation = new Conversation();
-    	conversation.setBotReply("Press Start One You Are Ready");
-    	conversation.setUserReply(prompts.getPrompt());
-    	users.getChatsId().add(chat.getChatId());	
-    	conRepo.save(conversation);
-    	chat.getConversationsId().add(conversation.getConversationId());
-    	chatRepo.save(chat);
-    	userRepo.save(users);
-    	
-		return conversation;
+	    Chat chats = new Chat();
+	    Chat chat = chatRepo.save(chats);
+	    
+	    String interviewPrompt = Prompts.getInterviewPrompt(prompts.getPrompt());
+//	    generate(interviewPrompt);
+	    Conversation conversation = new Conversation();
+	    conversation.setBotReply(newAi(new Prompts(interviewPrompt),session));
+	    conversation.setUserReply(prompts.getPrompt());
+
+	    // Ensure conversationsId is initialized as an empty list
+	    if (chat.getConversationsId() == null) {
+	        chat.setConversationsId(new ArrayList<>());
+	    }
+
+	    users.getChatsId().add(chat.getChatId());
+//	    conRepo.save(conversation);
+	    chat.getConversationsId().add(conversation.getConversationId());
+//	    conRepo.save(conversation);
+//	    chatRepo.save(chat);
+//	    userRepo.save(users);
+
+	    return conversation;
 	}
 	
 	@Override
@@ -205,25 +216,53 @@ public class OpenAi implements IOpenAi{
 	
 
 	@Override
-	public Map<Recommendation, String> stopInterviewAndGetScore(Integer userId) {
+	public Prompts stopInterviewAndGetScore(Integer chatId , HttpSession session) {
 		// TODO Auto-generated method stub
-		return null;
-	}
+	
+	    return new Prompts(newAi(new Prompts("Stop The Interview and give the feedaback and end the interview"),session));
 
+	}
 	@Override
-	public Conversation countinueInterview(Integer chatId, Prompts prompts) {
-		
-		Optional<Chat> findById = chatRepo.findById(chatId);
-		if (findById.isEmpty()) return null;
-		Chat chat = findById.get();
-		Conversation conversation = new Conversation();
-		conversation.setBotReply("");
-		conversation.setUserReply(prompts.getPrompt());
-		chat.getConversationsId().add(chat.getChatId());
-		conRepo.save(conversation);	
-    	chat.getConversationsId().add(conversation.getConversationId());
-    	chatRepo.save(chat);
-		return conversation;
+	public Conversation countinueInterview(Integer chatId, Prompts prompts , HttpSession session)  {
+		if (session == null) {
+	        // Handle the case when the session is null
+	        // You might want to log an error or throw an exception based on your use case
+	        return null;
+	    }
+
+	    Chat chat2 = chatRepo.findById(chatId).orElse(null);
+	    if (chat2 == null) {
+	        // Handle the case when the chat with the given chatId is not found
+	        return null;
+	    }
+
+	    Users users = userRepo.findById(chat2.getUserId()).orElse(null);
+	    if (users == null) {
+	        // Handle the case when the user associated with the chat is not found
+	        return null;
+	    }
+
+	    Chat chats = new Chat();
+	    Chat chat = chatRepo.save(chats);
+
+	    String interviewPrompt = Prompts.getInterviewPrompt(prompts.getPrompt());
+	    Conversation conversation = new Conversation();
+	    conversation.setBotReply(newAi(prompts, session)); // Pass the session to newAi method
+	    conversation.setUserReply(prompts.getPrompt());
+
+	    // Ensure conversationsId is initialized as an empty list
+	    if (chat.getConversationsId() == null) {
+	        chat.setConversationsId(new ArrayList<>());
+	    }
+
+	    users.getChatsId().add(chat.getChatId());
+//	    conRepo.save(conversation);
+	    chat.getConversationsId().add(conversation.getConversationId());
+//	    chatRepo.save(chat);
+//	    userRepo.save(users);
+
+	    return conversation;
+
 	}
   
 }
