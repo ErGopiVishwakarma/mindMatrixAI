@@ -1,4 +1,4 @@
-# MindMatrix - AI-Powered Interview Mastery Platform <p> <img src="logo.png" alt="Project Logo" width="100" style="border: 1px solid black; border-radius: 10px;"> </p>
+# MindMatrix - AI-Powered Interview Mastery Platform <p> <img src="logo.png" alt="Project Logo" width="160" style="border: 1px solid black; border-radius: 10px;"> </p>
 
 Welcome to MindMatrix, an AI-Powered Interview Mastery platform! This innovative platform is designed to help students practice for job interviews by simulating real interview scenarios and providing personalized feedback. With the magic of AI and language processing, students can improve their interview skills, build confidence, and increase their chances of success during real interviews.
 
