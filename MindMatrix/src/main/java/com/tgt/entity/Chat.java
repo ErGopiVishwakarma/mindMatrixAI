@@ -1,15 +1,15 @@
-package com.tgt.model;
+package com.tgt.entity;
 
 import java.util.List;
 
-import com.tgt.controller.Recommendation;
+import com.tgt.model.Recommendation;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,12 +22,9 @@ public class Chat {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer chatId;
-	private String industrieType;
-	private String jobRole;
-	private String diffculityLevel;
-	private String interviewMode;
-	@OneToMany
-	private List<Conversation> conversations;
+	private Integer userId;
+	@ElementCollection
+	private List<Integer> conversationsId;
 	private Double score;
 	@Enumerated
 	private Recommendation recommendation;

@@ -1,4 +1,4 @@
-package com.tgt.controller;
+package com.tgt.model;
 
 public enum Recommendation {
 	FAIL,
