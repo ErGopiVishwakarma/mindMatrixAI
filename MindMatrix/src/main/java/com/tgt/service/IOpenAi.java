@@ -26,10 +26,10 @@ public interface IOpenAi {
     List<Chat> getChatListByChatId(Integer chatId);
     List<Chat> getAllChatsForUser(Integer userId);
     
-    Conversation startInterview(Integer userId, Prompts prompts);
-    Conversation countinueInterview(Integer userId, Prompts prompts);
+    Conversation startInterview(Integer userId, Prompts prompts , HttpSession session);
+    Conversation countinueInterview(Integer userId, Prompts prompts , HttpSession session);
     
     Conversation getConversationBYId(Integer convId);
     List<Conversation> getAllConversationsInChat(Integer userId);
-    Map<Recommendation, String> stopInterviewAndGetScore(Integer userId);
+    Prompts stopInterviewAndGetScore(Integer userId, HttpSession session);
 }

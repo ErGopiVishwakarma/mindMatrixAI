@@ -1,0 +1,17 @@
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/controller/GPT3Controller.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/repository/UsersRepository.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/entity/Conversation.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/model/Message.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/model/Prompts.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/model/ChatRequest.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/service/IOpenAi.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/service/OpenAi.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/model/Recommendation.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/repository/ConversationRepository.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/entity/Chat.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/entity/Users.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/model/ChatResponse.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/config/Config.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/MindMatrix.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/model/RegForm.java
+/Users/akhtar/Desktop/mindMatrixAI/MindMatrix/src/main/java/com/tgt/repository/ChatRepository.java

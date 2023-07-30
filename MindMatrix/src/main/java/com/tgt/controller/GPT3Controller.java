@@ -101,8 +101,8 @@ public class GPT3Controller {
     }
 
     @PostMapping("/{userId}/start-interview")
-    public ResponseEntity<Conversation> startInterview(@PathVariable Integer userId, @RequestBody Prompts prompts) {
-        Conversation conversation = openAi.startInterview(userId, prompts);
+    public ResponseEntity<Conversation> startInterview(@PathVariable Integer userId, @RequestBody Prompts prompts , HttpSession session) {
+        Conversation conversation = openAi.startInterview(userId, prompts,session);
         if (conversation != null) {
             return ResponseEntity.ok(conversation);
         } else {
@@ -127,12 +127,26 @@ public class GPT3Controller {
     }
 
     @GetMapping("/{userId}/stop-interview")
-    public ResponseEntity<Map<Recommendation, String>> stopInterviewAndGetScore(@PathVariable Integer userId) {
-        Map<Recommendation, String> scoreMap = openAi.stopInterviewAndGetScore(userId);
-        if (scoreMap != null) {
-            return ResponseEntity.ok(scoreMap);
+    public Prompts  stopInterviewAndGetScore(@PathVariable Integer userId , HttpSession session) {
+         Prompts stopInterviewAndGetScore = openAi.stopInterviewAndGetScore(userId,session);
+        if (stopInterviewAndGetScore != null) {
+            return openAi.stopInterviewAndGetScore(userId,session);
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return null;
         }
     }
+    
+    @GetMapping("/{chatId}/continue")
+    Conversation countinueInterview(Integer chatId, Prompts prompts , HttpSession session) {
+    	
+    	Conversation conversation = openAi.countinueInterview(chatId,prompts,session);
+    	
+
+    	if (conversation != null) {
+            return conversation;
+        }        
+    	return null;
+    
+    }
+    	
 }
