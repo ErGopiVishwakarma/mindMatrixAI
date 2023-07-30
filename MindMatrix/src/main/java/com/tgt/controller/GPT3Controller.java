@@ -1,10 +1,11 @@
 package com.tgt.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +15,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tgt.model.Chat;
-import com.tgt.model.Conversation;
+import com.tgt.entity.Chat;
+import com.tgt.entity.Conversation;
+import com.tgt.entity.Users;
 import com.tgt.model.Prompts;
+import com.tgt.model.Recommendation;
 import com.tgt.model.RegForm;
-import com.tgt.model.Users;
 import com.tgt.service.OpenAi;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @CrossOrigin(origins = "*")
@@ -29,69 +33,106 @@ public class GPT3Controller {
 
 	@Autowired
     OpenAi openAi;
-
+	
+	@PostMapping("/generate-text-newAi")
+    public Prompts newAi(@RequestBody Prompts prompts ,HttpSession session ){  
+		
+		String newAi = openAi.newAi(prompts , session);
+    	return  new Prompts(newAi);
+    }
+	
+	
     @PostMapping("/generate-text")
-    public Prompts generateText(@RequestBody Prompts prompts ) throws InterruptedException, ExecutionException {    
+    public String generateText(@RequestBody Prompts prompts ) throws InterruptedException, ExecutionException {    
     	// The JSON-formatted string
-    	String[] inputString = openAi.generate(prompts.getPrompt()).get().split(":");
-    	String[] split = inputString[9].split("}");
-    	return new Prompts(split[0]);
-    }
-    
-    @GetMapping("/user")
-    public ResponseEntity<Users> generateText() {    	
+//    	String[] inputString = openAi.generate(prompts.getPrompt()).get().split(":");
+//    	String[] split = inputString[9].split("}");
+//    	return new Prompts(split[0]);
+    	return openAi.generate(prompts.getPrompt()).get();
     	
-    	return null;
     }
     
     
-    
-    @PostMapping("/signup")
-    public Users createUser(@RequestBody RegForm user) {
-        // Implement the logic to create a new user and return the created user object.
-        return null;
-    }
-    
-    @PostMapping("/signin")
-    public Users loginUser(@RequestBody RegForm user) {
-        // Implement the logic to create a new user and return the created user object.
-        return null;
-    }
-    
-
-    @GetMapping("/{userId}")
-    public Users getUserById(@PathVariable long userId) {
-        // Implement the logic to retrieve a user by their ID and return the user object.
-        Users user = null /* ... */;
-        return user;
+   
+    @PostMapping("/sign-in-sign-up")
+    public ResponseEntity<Users> signInSignUp(@RequestBody RegForm user) throws InterruptedException, ExecutionException{
+        Users createdUser = openAi.signInSignUp(user);
+        if (createdUser != null) {
+            return ResponseEntity.ok(createdUser);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
-    @PostMapping("/{userId}/chats")
-    public Chat createChatForUser(@PathVariable long userId, @RequestBody Chat chat) {
-        // Implement the logic to create a new chat for the specified user and return the created chat object.
-        return chat;
+    @GetMapping("/get-user/{userId}")
+    public ResponseEntity<Users> getUserById(@PathVariable Integer userId) {
+        Users user = openAi.getUserById(userId);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @GetMapping("/{userId}/chats")
-    public List<Chat> getAllChatsForUser(@PathVariable long userId) {
-        // Implement the logic to retrieve all chats for the specified user and return a list of chat objects.
-        List<Chat> chats = null;
-        return chats;
+    @PostMapping("/create-chat/{userId}")
+    public ResponseEntity<Chat> createChatForUser(@PathVariable Integer userId) {
+        Chat chat = openAi.createChatForUser(userId);
+        if (chat != null) {
+            return ResponseEntity.ok(chat);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
-    @PostMapping("/{userId}/chats/{chatId}/conversations")
-    public Conversation addConversationToChat(@PathVariable long userId, @PathVariable long chatId,
-                                              @RequestBody Conversation conversation) {
-        // Implement the logic to add a new conversation to the specified chat for the given user.
-        return conversation;
+    @GetMapping("/get-chat/{chatId}")
+    public ResponseEntity<Chat> getChatByChatId(@PathVariable Integer chatId) {
+        Chat chat = openAi.getChatByChatId(chatId);
+        if (chat != null) {
+            return ResponseEntity.ok(chat);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @GetMapping("/{userId}/chats/{chatId}/conversations")
-    public List<Conversation> getAllConversationsInChat(@PathVariable long userId, @PathVariable long chatId) {
-        // Implement the logic to retrieve all conversations in the specified chat for the given user.
-        List<Conversation> conversations = null;
-        return conversations;
+    @GetMapping("/get-all-chats/{userId}")
+    public ResponseEntity<List<Chat>> getAllChatsForUser(@PathVariable Integer userId) {
+        List<Chat> chats = openAi.getAllChatsForUser(userId);
+        return ResponseEntity.ok(chats);
     }
-    
+
+    @PostMapping("/{userId}/start-interview")
+    public ResponseEntity<Conversation> startInterview(@PathVariable Integer userId, @RequestBody Prompts prompts) {
+        Conversation conversation = openAi.startInterview(userId, prompts);
+        if (conversation != null) {
+            return ResponseEntity.ok(conversation);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/{convId}/get-conversation")
+    public ResponseEntity<Conversation> getConversationById(@PathVariable Integer convId) {
+        Conversation conversation = openAi.getConversationBYId(convId);
+        if (conversation != null) {
+            return ResponseEntity.ok(conversation);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{userId}/get-all-conversations")
+    public ResponseEntity<List<Conversation>> getAllConversationsInChat(@PathVariable Integer userId) {
+        List<Conversation> conversations = openAi.getAllConversationsInChat(userId);
+        return ResponseEntity.ok(conversations);
+    }
+
+    @GetMapping("/{userId}/stop-interview")
+    public ResponseEntity<Map<Recommendation, String>> stopInterviewAndGetScore(@PathVariable Integer userId) {
+        Map<Recommendation, String> scoreMap = openAi.stopInterviewAndGetScore(userId);
+        if (scoreMap != null) {
+            return ResponseEntity.ok(scoreMap);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 }
-

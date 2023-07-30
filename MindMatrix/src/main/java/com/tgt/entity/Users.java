@@ -1,5 +1,8 @@
-package com.tgt.model;
+package com.tgt.entity;
 
+import java.util.List;
+
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,14 +15,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Conversation {
+public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer conversationId;
-	private String conversation;
-	
-//	let userArayy =   [hello my nae is akhtar,what ca upi do ,,,,,,]
-//	ley bot array = [hi akhtar how are upi , erply , ]
-	
-	
+	private Integer userId;
+	private String name;
+	private String email;
+	private String password;
+	private String imageUrl;
+	@ElementCollection
+	private List<Integer> chatsId;
 }

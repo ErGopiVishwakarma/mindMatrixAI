@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class RegForm {
-	private String usernameorEmail; 
+	private String email; 
 	private String password;
+	private String imageUrl;
 }

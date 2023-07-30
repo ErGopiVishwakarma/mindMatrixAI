@@ -1,4 +1,4 @@
-package com.tgt.model;
+package com.tgt.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users {
+public class Conversation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer conversationId;
+	private Integer chatId;
 	private Integer userId;
-	private String name;
-	private String email;
-	private String password;
-	private Integer chatsId;
+	private String userReply;
+	private String botReply;	
 }
